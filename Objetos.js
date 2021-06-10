@@ -5,7 +5,16 @@ function User(displayName, email, password) {
   
   }
 
+/*Clase usuario*/
+class CreateUser {
+    constructor(displayName,email,password){
+        this.displayName = displayName;
+        this.email = email;
+        this.password = password;
+        
 
+    }
+}
 /*Clase de Job*/
 class Job {
     constructor(company, type, position,  location, category, description, email,howApply){
