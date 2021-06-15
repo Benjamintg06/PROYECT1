@@ -43,9 +43,7 @@ var password = document.getElementById("password").value;
          email,
          password
         );
-     
-        
-  
+
   const data = await fetchData(JSON.stringify({...datapostObjeto, id:"THFweJcAn5d0m3XBcdHAXK7Bczk1"}));
   console.log(data);
   }
