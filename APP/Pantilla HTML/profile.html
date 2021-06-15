@@ -46,12 +46,41 @@
                 </nav>
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Profile</h3>
-                    <div class="row mb-3" style="width: 1322px;padding: 12px;">
-                        <div class="col-lg-8">
-                          
-                            <div class="row">
+                    <div class="row mb-3" style="width: 100%;padding: 12px;">
+                        <div class="col-lg-8" style="width: 100%;">
+                            <div class="row mb-3 d-none">
                                 <div class="col">
-                                    <div class="card shadow mb-3">
+                                    <div class="card text-white bg-primary shadow">
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <div class="col">
+                                                    <p class="m-0">Peformance</p>
+                                                    <p class="m-0"><strong>65.2%</strong></p>
+                                                </div>
+                                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                            </div>
+                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card text-white bg-success shadow">
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <div class="col">
+                                                    <p class="m-0">Peformance</p>
+                                                    <p class="m-0"><strong>65.2%</strong></p>
+                                                </div>
+                                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                            </div>
+                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5% since last month</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="width: 100%;">
+                                <div class="col">
+                                    <div class="card shadow mb-3" style="width: 700;">
                                         <div class="card-header py-3">
                                             <p class="text-primary m-0 font-weight-bold">Update User&nbsp;</p>
                                         </div>
@@ -59,20 +88,13 @@
                                             <form>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="email"><strong>Email Address</strong></label><input class="form-control" type="email" placeholder="user@example.com" name="email"></div>
+                                                        <div class="form-group"><label for="first_name"><strong>User Name</strong></label><input class="form-control" id="username" type="text" placeholder="John" name="first_name"></div>
+                                                        <div class="form-group"><label for="last_name"><strong>Email</strong></label><input class="form-control" id="email" type="email"></div>
+                                                        <div class="form-group"><label for="last_name"><strong>Password</strong></label><input class="form-control" id="password" type="password" placeholder="New Password" name="last_name"></div>
+                                                        <div class="form-group"><label for="last_name"><strong>Repeat Password</strong></label><input class="form-control" id="PassConfirmation" type="password" placeholder="Doe" name="Password"></div>
                                                     </div>
                                                 </div>
-                                                <div class="form-row">
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" placeholder="John" name="first_name"></div>
-                                                        <div class="form-group"><label for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" placeholder="Doe" name="last_name"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="form-group"><label for="last_name"><strong>Password</strong></label><input class="form-control" type="password" placeholder="New Password" name="last_name"></div>
-                                                        <div class="form-group"><label for="last_name"><strong>Repeat Password</strong></label><input class="form-control" type="password" placeholder="Password Confirmation" name="Password"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
+                                                <div class="form-group"><button class="btn btn-primary btn-sm" id="btnprofile" type="submit">Save Settings</button></div>
                                             </form>
                                         </div>
                                     </div>
@@ -99,6 +121,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/script.min.js?h=9af5f655239f5ce4fa692ca1c1513d50"></script>
+    <script src= "Objetos.js"></script>
+    <script src= "profile.js"></script>
+    
 </body>
 
 </html>
