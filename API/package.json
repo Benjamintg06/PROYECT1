@@ -1,0 +1,23 @@
+{
+  "name": "firebase_node_ejemplo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "deploy": "git add . && git commit -m \"api para jobs y categories implementada\" && git push heroku master"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "firebase-admin": "^9.9.0",
+    "multer": "^1.4.2",
+    "uuid": "^8.3.2",
+    "ws": "^7.4.6"
+  }
+}
