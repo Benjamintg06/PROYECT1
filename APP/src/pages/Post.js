@@ -2,10 +2,12 @@ import React, { useState, useRef } from "react";
 import { useCategory } from "../contexts/CategoryContext";
 import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
+import { useAuth } from "../contexts/AuthContext";
 import Swal from "sweetalert2";
 
 export function Post(props) {
     const { categories } = useCategory();
+    const { currentUser } = useAuth();
 
     const [loading, setLoading] = useState(false);
 
@@ -30,6 +32,7 @@ export function Post(props) {
             category: category.current.value,
             type: type.current.value,
             description: description.current.value,
+            poster: currentUser.uid,
         };
 
         setLoading(true);
@@ -123,7 +126,6 @@ export function Post(props) {
                                             type="text"
                                             name="company"
                                             required
-                                            placeholder="Apple"
                                         />
                                         <label htmlFor="location">
                                             Location
@@ -135,9 +137,8 @@ export function Post(props) {
                                             type="text"
                                             name="location"
                                             required
-                                            placeholder="Santo Domingo"
                                         />
-                                        <div className="form-group has-feedback">
+                                        <div className="form-group">
                                             <label htmlFor="position">
                                                 Position
                                             </label>
@@ -147,18 +148,8 @@ export function Post(props) {
                                                 type="text"
                                                 name="position"
                                                 required
-                                                placeholder="Gerente"
                                             />
                                         </div>
-                                    </div>
-                                    <div
-                                        className="col-12 col-md-6"
-                                        id="message"
-                                        style={{
-                                            paddingRight: "20px",
-                                            paddingLeft: "20px",
-                                        }}
-                                    >
                                         <div className="form-row">
                                             <div className="col-sm-6">
                                                 <div
@@ -217,6 +208,15 @@ export function Post(props) {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div
+                                        className="col-12 col-md-6"
+                                        id="message"
+                                        style={{
+                                            paddingRight: "20px",
+                                            paddingLeft: "20px",
+                                        }}
+                                    >
                                         <div className="form-group">
                                             <label htmlFor="description">
                                                 Description
@@ -225,7 +225,6 @@ export function Post(props) {
                                                 ref={description}
                                                 className="form-control"
                                                 name="description"
-                                                placeholder="What is the job like?"
                                                 rows="5"
                                             ></textarea>
                                             <label htmlFor="email">Email</label>
@@ -235,7 +234,6 @@ export function Post(props) {
                                                 type="email"
                                                 name="email"
                                                 required
-                                                placeholder="example@gmail.com"
                                             />
                                             <label htmlFor="howApply">
                                                 How to apply?
@@ -245,7 +243,6 @@ export function Post(props) {
                                                 className="form-control"
                                                 name="howApply"
                                                 id="howApply"
-                                                placeholder="Envie su cv a.."
                                                 rows="5"
                                                 required
                                             ></textarea>

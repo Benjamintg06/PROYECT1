@@ -56,14 +56,22 @@ export function Sidebar(props) {
                             <span>Home</span>
                         </Link>
                     </li>
-                    {currentUser ? (
+                    {currentUser && (
                         <li className="nav-item" role="presentation">
                             <Link className="nav-link" to="/profile">
-                                <i className="fas fa-user"></i>
+                                <i className="fas fa-user-cog"></i>
                                 <span>Profile</span>
                             </Link>
                         </li>
-                    ) : null}
+                    )}
+                    {currentUser && (
+                        <li className="nav-item" role="presentation">
+                            <Link className="nav-link" to="/admin">
+                                <i className="fas fa-tools"></i>
+                                <span>Admin</span>
+                            </Link>
+                        </li>
+                    )}
                     {currentUser ? (
                         <li
                             className="nav-item"
@@ -71,14 +79,14 @@ export function Sidebar(props) {
                             onClick={handleLogOut}
                         >
                             <div className="nav-link">
-                                <i className="far fa-user-circle"></i>
+                                <i className="fas fa-sign-out-alt"></i>
                                 <span>Logout</span>
                             </div>
                         </li>
                     ) : (
                         <li className="nav-item" role="presentation">
                             <Link className="nav-link" to="/auth/login">
-                                <i className="far fa-user-circle"></i>
+                                <i className="fas fa-sign-in-alt"></i>
                                 <span>Login</span>
                             </Link>
                         </li>

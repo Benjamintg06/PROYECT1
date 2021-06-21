@@ -4,7 +4,7 @@ const collection = firestore.collection("jobs");
 
 const addJob = async (req, res, next) => {
     try {
-        const data = request.body;
+        const data = req.body;
         const jobToAdd = collection.doc(data.uid);
         Object.keys(data).forEach((key) => {
             if (data[key] === null || data[key] === undefined) data[key] = "";
@@ -49,7 +49,7 @@ const getJob = async (req, res, next) => {
 const updateJob = async (req, res, next) => {
     try {
         const uid = req.params.uid;
-        const data = request.body;
+        const data = req.body;
         const jobToUpdate = collection.doc(uid);
         Object.keys(data).forEach((key) => {
             if (data[key] === null || data[key] === undefined) delete data[key];

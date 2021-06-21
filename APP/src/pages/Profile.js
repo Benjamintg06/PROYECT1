@@ -3,6 +3,7 @@ import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
 import { useAuth } from "../contexts/AuthContext";
 import Swal from "sweetalert2";
+import { ProfileTable } from "../components/ProfileTable";
 
 export function Profile(props) {
     const { currentUser, setCurrentUser } = useAuth();
@@ -224,6 +225,7 @@ export function Profile(props) {
                             </div>
                         </div>
                     </div>
+                    <ProfileTable></ProfileTable>
                 </div>
             </div>
         </div>

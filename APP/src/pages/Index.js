@@ -1,60 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { MDBDataTableV5 } from "mdbreact";
-import { useJobs } from "../contexts/JobsContext";
-import { useCategory } from "../contexts/CategoryContext";
+import React from "react";
 import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
 import { Link } from "react-router-dom";
-import { JobModal } from "../components/JobModal";
+import { Table } from "../components/Table";
 
 export function Index(props) {
-    const { jobs } = useJobs();
-    const { categories } = useCategory();
-
-    const [dataTable, setDataTable] = useState({ columns: [], rows: [] });
-    const [categoryID, setCategoryID] = useState("");
-    const [job, setJob] = useState({});
-    const [showModal, setShowModal] = useState(false);
-
-    const select = useRef(null);
-
-    const selectChange = (e) => {
-        setCategoryID(select.current.value);
-    };
-
-    const rowClick = (job) => {
-        setJob(job);
-        setShowModal(true);
-    };
-
-    useEffect(() => {
-        const columns = [
-            {
-                label: "Location",
-                field: "location",
-            },
-            {
-                label: "Position",
-                field: "position",
-            },
-            {
-                label: "Company",
-                field: "company",
-            },
-        ];
-        setDataTable({
-            columns: columns,
-            rows: jobs
-                .filter((job) => job.category.includes(categoryID))
-                .map((job) => ({
-                    location: job.location,
-                    position: job.position,
-                    company: job.company,
-                    clickEvent: () => rowClick(job),
-                })),
-        });
-    }, [jobs, categoryID]);
-
     return (
         <div id="wrapper">
             <Sidebar></Sidebar>
@@ -83,7 +33,7 @@ export function Index(props) {
                             </Link>
                         </div>
                     </div>
-                    <div className="container-fluid">
+                    {/* <div className="container-fluid">
                         <form>
                             <div className="field">
                                 <select
@@ -147,7 +97,8 @@ export function Index(props) {
                             showModal={setShowModal}
                             show={showModal}
                         ></JobModal>
-                    </div>
+                    </div>*/}
+                    <Table></Table>
                 </div>
             </div>
         </div>
