@@ -3,3 +3,4 @@ tmp/
 sockets/observer.js
 sockets/packerObserver.js
 .env
+serviceAccountKey.json

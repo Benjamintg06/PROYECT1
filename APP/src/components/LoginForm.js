@@ -24,6 +24,7 @@ export function LoginForm(props) {
             setLoading(false);
         }
     }
+
     return (
         <div className="row">
             <div className="col-lg-6 d-none d-lg-flex">
@@ -85,7 +86,7 @@ export function LoginForm(props) {
                                             btn-user
                                         "
                             type="submit"
-                            disable={loading}
+                            disable={loading.toString()}
                         >
                             Login
                         </button>
