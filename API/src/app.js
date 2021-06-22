@@ -5,6 +5,7 @@ const path = require("path");
 const { collections } = require("./routes/collection");
 const { job } = require("./routes/job");
 const { user } = require("./routes/user");
+const { auth } = require("./routes/auth");
 const {
     multerErrorHandler,
 } = require("./middlewares/errorHandlers/multerError");
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use("/api/", collections);
 app.use("/api/", job);
 app.use("/api/", user);
+app.use("/api/", auth);
 
 // error handlers
 app.use(multerErrorHandler);

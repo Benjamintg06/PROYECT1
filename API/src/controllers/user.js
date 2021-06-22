@@ -7,7 +7,7 @@ const addUser = async (req, res, next) => {
             email: data.email,
             password: data.password,
             displayName: data.displayName,
-            photoURL: data.photoURL || "",
+            //photoURL: data.photoURL || "",
             emailVerified: false,
             disabled: false,
         });
