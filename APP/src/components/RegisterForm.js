@@ -132,7 +132,7 @@ export function RegisterForm(props) {
                         <button
                             className="btn btn-primary btn-block text-white btn-user"
                             type="submit"
-                            disable={loading}
+                            disable={loading.toString()}
                         >
                             Register Account
                         </button>

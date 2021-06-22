@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 export function Sidebar(props) {
     const sideBar = useRef(null);
-    const { logout, currentUser } = useAuth();
+    const { logout, currentUser, isAdmin } = useAuth();
     const history = useHistory();
 
     async function handleLogOut() {
@@ -64,7 +64,7 @@ export function Sidebar(props) {
                             </Link>
                         </li>
                     )}
-                    {currentUser && (
+                    {isAdmin && (
                         <li className="nav-item" role="presentation">
                             <Link className="nav-link" to="/admin">
                                 <i className="fas fa-tools"></i>

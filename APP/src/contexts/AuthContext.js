@@ -8,7 +8,8 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-    const [currentUser, setCurrentUser] = useState();
+    const [currentUser, setCurrentUser] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
 
     function singup(email, password) {
@@ -31,11 +32,25 @@ export function AuthProvider({ children }) {
         const unsusribe = projectAuth.onAuthStateChanged((user) => {
             setCurrentUser(user);
             setLoading(false);
+            if (!user) {
+                setIsAdmin(false);
+            }
+            if (projectAuth.currentUser) {
+                projectAuth.currentUser
+                    .getIdTokenResult()
+                    .then((idTokenResult) => {
+                        setIsAdmin(idTokenResult.claims.admin);
+                    })
+                    .catch((error) => {
+                        setIsAdmin(false);
+                    });
+            }
         });
         return unsusribe;
     }, []);
 
     const value = {
+        isAdmin,
         currentUser,
         setCurrentUser,
         singup,

@@ -5,6 +5,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { JobsProvider } from "./contexts/JobsContext";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from "./components/AdminRoute";
 import { Index } from "./pages/Index";
 import { Profile } from "./pages/Profile";
 import { Admin } from "./pages/Admin";
@@ -29,7 +30,7 @@ function App() {
                             ></Route>
                             <PrivateRoute path="/upload" component={Post} />
                             <PrivateRoute path="/profile" component={Profile} />
-                            <PrivateRoute path="/admin" component={Admin} />
+                            <AdminRoute path="/admin" component={Admin} />
                             <Route
                                 exact
                                 path="/auth/login"
