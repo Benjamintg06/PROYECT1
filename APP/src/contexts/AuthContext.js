@@ -13,6 +13,8 @@ export function AuthProvider({ children }) {
     const [isAdmin, setIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
 
+    const [image, setImage] = useState(null);
+
     function singup(email, password) {
         return projectAuth.createUserWithEmailAndPassword(email, password);
     }
@@ -52,10 +54,20 @@ export function AuthProvider({ children }) {
         return unsusribe;
     }, []);
 
+    useEffect(() => {
+        if (currentUser) {
+            const ramdon = Date.now();
+            setImage(
+                `https://storage.googleapis.com/proyectofinalpw-d35e3.appspot.com/${currentUser.uid}?${ramdon}`
+            );
+        }
+    }, [currentUser]);
+
     const value = {
         isAdmin,
         token,
         currentUser,
+        image,
         setCurrentUser,
         singup,
         login,

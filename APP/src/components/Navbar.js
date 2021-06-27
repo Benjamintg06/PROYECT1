@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export function Navbar(props) {
-    const { currentUser } = useAuth();
+    const { currentUser, image } = useAuth();
+
     const toggle = (e) => {
         document.getElementById("sidebar").classList.toggle("toggled");
     };
+
     return (
         <nav
             className="
@@ -71,8 +73,9 @@ export function Navbar(props) {
                                 className="border rounded-circle img-profile"
                                 alt="Profile"
                                 src={
-                                    currentUser.photoURL ||
-                                    "assets/img/avatars/image.png"
+                                    currentUser.photoURL
+                                        ? image
+                                        : "assets/img/avatars/image.png"
                                 }
                             />
                         </div>

@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { ProfileTable } from "../components/ProfileTable";
 
 export function Profile(props) {
-    const { currentUser, setCurrentUser, token } = useAuth();
+    const { currentUser, setCurrentUser, token, image } = useAuth();
 
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState(null);
@@ -63,18 +63,8 @@ export function Profile(props) {
                     );
                 }
             }
-            const user = {
-                uid: currentUser.uid,
-                displayName: displayName.current.value,
-                email: email.current.value,
-                password: password.current.value,
-            };
-            Object.keys(user).forEach((key) => {
-                if (!user[key]) delete user[key];
-            });
             const response = await fetch(
                 `https://prueba-api-programacion-3.herokuapp.com/api/user/${currentUser.uid}/${token}`,
-                
                 {
                     method: "PUT",
                     body: sendForm(),
@@ -126,8 +116,9 @@ export function Profile(props) {
                                             alt="Profile"
                                             className="rounded-circle mb-3 mt-4"
                                             src={
-                                                currentUser.photoURL ||
-                                                "assets/img/avatars/image.png"
+                                                currentUser.photoURL
+                                                    ? image
+                                                    : "assets/img/avatars/image.png"
                                             }
                                             width="160"
                                             height="160"
