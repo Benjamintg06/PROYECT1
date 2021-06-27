@@ -30,9 +30,7 @@ export function RegisterForm(props) {
                 password: password.current.value,
             };
             const response = await fetch(
-                //`https://prueba-api-programacion-3.herokuapp.com/api/user`,
-                `http://localhost:5050/api/user`,
-
+                `https://prueba-api-programacion-3.herokuapp.com/api/user`,
                 {
                     method: "POST",
                     headers: {

@@ -73,14 +73,10 @@ export function Profile(props) {
                 if (!user[key]) delete user[key];
             });
             const response = await fetch(
-                //`https://prueba-api-programacion-3.herokuapp.com/api/user/${currentUser.uid}/${token}`,
-                `http://localhost:5050/api/user/${currentUser.uid}/${token}`,
+                `https://prueba-api-programacion-3.herokuapp.com/api/user/${currentUser.uid}/${token}`,
+                
                 {
                     method: "PUT",
-                    // headers: {
-                    //     "Content-Type": "application/json",
-                    // },
-                    // body: JSON.stringify(user),
                     body: sendForm(),
                 }
             );
