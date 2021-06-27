@@ -26,7 +26,6 @@ module.exports = (wss) => {
 
         ws.on("close", () => {
             unsubscribe();
-            console.log("Client disconnected");
         });
     });
 

@@ -1,4 +1,4 @@
-const { firestore, FieldValue } = require("../config/firebase");
+const { firestore } = require("../config/firebase");
 
 const addCollection = async (req, res, next) => {
     try {
@@ -9,7 +9,7 @@ const addCollection = async (req, res, next) => {
             if (data[key] === null || data[key] === undefined) data[key] = "";
         });
         await newRecord.create(data);
-        const recordAdded = await collection.doc(newRecord.uid).get();
+        const recordAdded = await newRecord.get();
         return res.status(200).json(recordAdded.data());
     } catch (error) {
         console.log(error);

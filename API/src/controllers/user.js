@@ -2,12 +2,13 @@ const { auth } = require("../config/firebase");
 
 const addUser = async (req, res, next) => {
     try {
-        const data = req.body;
+        const { uid, email, password, displayName, photoURL } = req.body;
         const userRecord = await auth.createUser({
-            email: data.email,
-            password: data.password,
-            displayName: data.displayName,
-            //photoURL: data.photoURL || "",
+            uid,
+            email,
+            password,
+            displayName,
+            photoURL,
             emailVerified: false,
             disabled: false,
         });

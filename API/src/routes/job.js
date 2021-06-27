@@ -14,9 +14,12 @@ const { setTimestamp } = require("../middlewares/setTimestamp");
 const { uploadToGCS } = require("../middlewares/uploadToGCS");
 const { deleteFromGCS } = require("../middlewares/deleteFromGCS");
 const { multer } = require("../middlewares/multer");
+const { verifyToken } = require("../middlewares/verifyToken");
+const { verifyIdToken } = require("../middlewares/verifyIdToken");
 
 router.post(
-    "/jobs",
+    "/jobs/:token",
+    verifyToken,
     multer().single("logo"),
     generateUUID,
     setTimestamp,
@@ -29,14 +32,20 @@ router.get("/jobs", getJobs);
 router.get("/jobs/:uid", getJob);
 
 router.put(
-    "/jobs/:uid",
+    "/jobs/:uid/:poster/:token",
+    verifyIdToken,
     multer().single("logo"),
     deleteFromGCS,
     uploadToGCS,
     updateJob
 );
 
-router.delete("/jobs/:uid", deleteFromGCS, deleteJob);
+router.delete(
+    "/jobs/:uid/:poster/:token",
+    verifyIdToken,
+    deleteFromGCS,
+    deleteJob
+);
 
 module.exports = {
     job: router,

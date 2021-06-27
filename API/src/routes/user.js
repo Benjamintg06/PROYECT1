@@ -11,20 +11,22 @@ const {
 const { uploadToGCS } = require("../middlewares/uploadToGCS");
 const { deleteFromGCS } = require("../middlewares/deleteFromGCS");
 const { multer } = require("../middlewares/multer");
+const { verifyUserToken } = require("../middlewares/verifyUserToken");
 
 router.post("/user", multer().single("logo"), uploadToGCS, addUser);
 
-router.get("/user/:uid", getUser);
+router.get("/user/:uid/:token", verifyUserToken, getUser);
 
 router.put(
-    "/user/:uid",
+    "/user/:uid/:token",
+    verifyUserToken,
     multer().single("logo"),
     deleteFromGCS,
     uploadToGCS,
     updateUser
 );
 
-router.delete("/user/:uid", deleteUser);
+router.delete("/user/:uid/:token", verifyUserToken, deleteUser);
 
 module.exports = {
     user: router,

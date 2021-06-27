@@ -4,7 +4,7 @@ const { port } = require("./config/config");
 const server = require("http").Server(app);
 const { Server } = require("ws");
 
-const socket = require("./sockets/jobStreamer");
+const socket = require("./sockets/Streamer");
 const wss = new Server({ server: server });
 socket(wss);
 

@@ -13,7 +13,6 @@ const addJob = async (req, res, next) => {
         const jobAdded = await jobToAdd.get();
         return res.status(200).json(jobAdded.data());
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ message: error.message });
     }
 };
