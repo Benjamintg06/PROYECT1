@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import Swal from "sweetalert2";
+import { useAuth } from "../contexts/AuthContext";
 
 export function RegisterAdminForm(props) {
     const email = useRef();
@@ -8,6 +9,7 @@ export function RegisterAdminForm(props) {
     const firstName = useRef();
     const lastName = useRef();
     const [loading, setLoading] = useState(false);
+    const { token } = useAuth();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -36,7 +38,8 @@ export function RegisterAdminForm(props) {
                 password: password.current.value,
             };
             const response = await fetch(
-                `https://prueba-api-programacion-3.herokuapp.com/api/auth/admin`,
+                `https://prueba-api-programacion-3.herokuapp.com/api/auth/admin/${token}`,
+
                 {
                     method: "POST",
                     headers: {

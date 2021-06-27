@@ -11,6 +11,7 @@ export function CategoryProvider({ children }) {
 
     const value = {
         categories,
+        setCategories,
     };
 
     useEffect(() => {
@@ -28,7 +29,7 @@ export function CategoryProvider({ children }) {
             }
         };
         getCategories();
-        return getCategories();
+        return getCategories;
     }, []);
 
     return (

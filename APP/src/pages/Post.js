@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 export function Post(props) {
     const { categories } = useCategory();
-    const { currentUser } = useAuth();
+    const { currentUser, token } = useAuth();
 
     const [loading, setLoading] = useState(false);
 
@@ -39,7 +39,7 @@ export function Post(props) {
 
         try {
             const response = await fetch(
-                `https://prueba-api-programacion-3.herokuapp.com/api/jobs`,
+                `https://prueba-api-programacion-3.herokuapp.com/api/jobs/${token}`,
                 {
                     method: "POST",
                     headers: {

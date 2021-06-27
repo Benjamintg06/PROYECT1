@@ -9,6 +9,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
+    const [token, setToken] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -31,26 +32,29 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const unsusribe = projectAuth.onAuthStateChanged((user) => {
             setCurrentUser(user);
-            setLoading(false);
-            if (!user) {
-                setIsAdmin(false);
-            }
-            if (projectAuth.currentUser) {
-                projectAuth.currentUser
-                    .getIdTokenResult()
+            if (user) {
+                user.getIdToken()
+                    .then((token) => setToken(token))
+                    .catch((error) => setToken(null));
+                user.getIdTokenResult()
                     .then((idTokenResult) => {
                         setIsAdmin(idTokenResult.claims.admin);
                     })
                     .catch((error) => {
                         setIsAdmin(false);
                     });
+            } else {
+                setToken(null);
+                setIsAdmin(false);
             }
+            setLoading(false);
         });
         return unsusribe;
     }, []);
 
     const value = {
         isAdmin,
+        token,
         currentUser,
         setCurrentUser,
         singup,

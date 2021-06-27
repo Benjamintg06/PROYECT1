@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { ProfileTable } from "../components/ProfileTable";
 
 export function Profile(props) {
-    const { currentUser, setCurrentUser } = useAuth();
+    const { currentUser, setCurrentUser, token } = useAuth();
 
     const [loading, setLoading] = useState(false);
 
@@ -42,7 +42,7 @@ export function Profile(props) {
                 if (!user[key]) delete user[key];
             });
             const response = await fetch(
-                `https://prueba-api-programacion-3.herokuapp.com/api/user/${currentUser.uid}`,
+                `https://prueba-api-programacion-3.herokuapp.com/api/user/${currentUser.uid}/${token}`,
                 {
                     method: "PUT",
                     headers: {

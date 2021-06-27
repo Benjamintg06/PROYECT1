@@ -1,11 +1,11 @@
 import React, { useState, useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useCategory } from "../contexts/CategoryContext";
+import { useAuth } from "../contexts/AuthContext";
 import Swal from "sweetalert2";
 
-export function EditJobModal(props) {
-    const job = props.job;
-    const showModal = props.showModal;
+export function EditJobModal({ job, show, showModal }) {
+    const { token } = useAuth();
 
     // Inicio variables para el envio del formulario
     const [loading, setLoading] = useState(false);
@@ -29,7 +29,7 @@ export function EditJobModal(props) {
 
         try {
             const response = await fetch(
-                `https://prueba-api-programacion-3.herokuapp.com/api/jobs/${job.uid}`,
+                `https://prueba-api-programacion-3.herokuapp.com/api/jobs/${job.uid}/${job.poster}/${token}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -81,7 +81,7 @@ export function EditJobModal(props) {
 
         try {
             const response = await fetch(
-                `https://prueba-api-programacion-3.herokuapp.com/api/jobs/${job.uid}`,
+                `https://prueba-api-programacion-3.herokuapp.com/api/jobs/${job.uid}/${job.poster}/${token}`,
                 {
                     method: "PUT",
                     headers: {
@@ -118,7 +118,7 @@ export function EditJobModal(props) {
     };
 
     return (
-        <Modal show={props.show} onHide={handleClose} keyboard={false}>
+        <Modal show={show} onHide={handleClose} keyboard={false}>
             <Modal.Header closeButton>
                 <Modal.Title>Edit Job</Modal.Title>
             </Modal.Header>

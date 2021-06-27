@@ -8,6 +8,13 @@ export function AdminTable(props) {
     const { jobs } = useJobs();
     const { categories } = useCategory();
 
+    const categoriesOptions = () =>
+        categories.map((category) => (
+            <option key={category.uid} value={category.uid}>
+                {category.name}
+            </option>
+        ));
+
     const [dataTable, setDataTable] = useState({ columns: [], rows: [] });
     const [categoryID, setCategoryID] = useState("");
     const [job, setJob] = useState({});
@@ -23,7 +30,17 @@ export function AdminTable(props) {
         setJob(job);
         setShowModal(true);
     };
-
+    useEffect(() => {
+        categories.sort((a, b) => {
+            if (a.name > b.name) {
+                return 1;
+            }
+            if (a.name < b.name) {
+                return -1;
+            }
+            return 0;
+        });
+    }, [categories]);
     useEffect(() => {
         const columns = [
             {
@@ -70,11 +87,7 @@ export function AdminTable(props) {
                             onChange={selectChange}
                         >
                             <option value="">All</option>
-                            {categories.map((category) => (
-                                <option key={category.uid} value={category.uid}>
-                                    {category.name}
-                                </option>
-                            ))}
+                            {categoriesOptions()}
                         </select>
                         <label
                             className="mb-0"
