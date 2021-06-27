@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export function Navbar(props) {
+    const { currentUser } = useAuth();
     const toggle = (e) => {
         document.getElementById("sidebar").classList.toggle("toggled");
     };
@@ -56,6 +58,26 @@ export function Navbar(props) {
                         <span>GET A JOB</span>
                     </div>
                 </Link>
+                {currentUser && (
+                    <div className="dropdown no-arrow">
+                        <div
+                            className="dropdown-toggle nav-link"
+                            data-toggle="dropdown"
+                            aria-expanded="false"
+                            href="#"
+                        >
+                            <img
+                                style={{ height: "50px", width: "50px" }}
+                                className="border rounded-circle img-profile"
+                                alt="Profile"
+                                src={
+                                    currentUser.photoURL ||
+                                    "assets/img/avatars/image.png"
+                                }
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
         </nav>
     );

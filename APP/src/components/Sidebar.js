@@ -52,7 +52,8 @@ export function Sidebar(props) {
                 <hr className="sidebar-divider my-0" />
                 <ul className="nav navbar-nav text-light" id="accordionSidebar">
                     <li className="nav-item" role="presentation">
-                        <Link className="nav-link" to="/">
+                        <Link className="nav-link active" to="/">
+                            <i className="fas fa-home"></i>
                             <span>Home</span>
                         </Link>
                     </li>

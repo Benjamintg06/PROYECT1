@@ -9,11 +9,42 @@ export function Profile(props) {
     const { currentUser, setCurrentUser, token } = useAuth();
 
     const [loading, setLoading] = useState(false);
+    const [file, setFile] = useState(null);
 
+    const profileForm = useRef();
     const displayName = useRef();
     const email = useRef();
     const password = useRef();
     const confirmPassword = useRef();
+    const photo = useRef();
+
+    const sendForm = () => {
+        const formData = new FormData();
+        formData.append("uid", currentUser.uid);
+        if (displayName.current.value) {
+            formData.append("displayName", displayName.current.value);
+        }
+        if (email.current.value) {
+            formData.append("email", email.current.value);
+        }
+        if (password.current.value) {
+            formData.append("password", password.current.value);
+        }
+        if (file) {
+            formData.append("logo", file, file.name);
+        }
+        return formData;
+    };
+
+    const handleChange = (e) => {
+        const newFile = e.target.files[0];
+        setFile(newFile);
+        if (newFile) {
+            const objectURL = URL.createObjectURL(newFile);
+            photo.current.src = objectURL;
+        }
+        sendForm();
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,13 +73,15 @@ export function Profile(props) {
                 if (!user[key]) delete user[key];
             });
             const response = await fetch(
-                `https://prueba-api-programacion-3.herokuapp.com/api/user/${currentUser.uid}/${token}`,
+                //`https://prueba-api-programacion-3.herokuapp.com/api/user/${currentUser.uid}/${token}`,
+                `http://localhost:5050/api/user/${currentUser.uid}/${token}`,
                 {
                     method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(user),
+                    // headers: {
+                    //     "Content-Type": "application/json",
+                    // },
+                    // body: JSON.stringify(user),
+                    body: sendForm(),
                 }
             );
             const { status } = response;
@@ -88,9 +121,43 @@ export function Profile(props) {
                     <Navbar></Navbar>
                     <div className="container-fluid">
                         <h3 className="text-dark mb-4">Profile</h3>
-                        <div className="row mb-3" style={{ width: "100%" }}>
-                            <div className="col-lg-8" style={{ width: "100%" }}>
-                                <div className="row" style={{ width: "100%" }}>
+                        <div className="row mb-3">
+                            <div className="col-lg-4">
+                                <div className="card mb-3">
+                                    <div className="card-body text-center shadow">
+                                        <img
+                                            ref={photo}
+                                            alt="Profile"
+                                            className="rounded-circle mb-3 mt-4"
+                                            src={
+                                                currentUser.photoURL ||
+                                                "assets/img/avatars/image.png"
+                                            }
+                                            width="160"
+                                            height="160"
+                                        />
+                                        <div className="mb-3">
+                                            <div className="custom-file">
+                                                <input
+                                                    type="file"
+                                                    className="custom-file-input"
+                                                    id="customFile"
+                                                    onChange={handleChange}
+                                                />
+                                                <label
+                                                    className="custom-file-label"
+                                                    htmlFor="customFile"
+                                                >
+                                                    {file?.name ||
+                                                        "Choose file"}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-8">
+                                <div className="row">
                                     <div className="col">
                                         <div className="card shadow mb-3">
                                             <div className="card-header py-3">
@@ -105,7 +172,10 @@ export function Profile(props) {
                                                 </p>
                                             </div>
                                             <div className="card-body">
-                                                <form onSubmit={handleSubmit}>
+                                                <form
+                                                    onSubmit={handleSubmit}
+                                                    ref={profileForm}
+                                                >
                                                     <div className="form-row">
                                                         <div className="col">
                                                             <div
@@ -126,12 +196,11 @@ export function Profile(props) {
                                                                     className="
                                                                         form-control
                                                                     "
-                                                                    id="username"
+                                                                    name="displayName"
                                                                     type="text"
                                                                     placeholder={
                                                                         currentUser.displayName
                                                                     }
-                                                                    name="displayName"
                                                                 />
                                                             </div>
                                                             <div
@@ -149,7 +218,7 @@ export function Profile(props) {
                                                                         form-control
                                                                     "
                                                                     ref={email}
-                                                                    id="email"
+                                                                    name="email"
                                                                     placeholder={
                                                                         currentUser.email
                                                                     }
@@ -173,9 +242,8 @@ export function Profile(props) {
                                                                     ref={
                                                                         password
                                                                     }
-                                                                    id="password"
+                                                                    name="password"
                                                                     type="password"
-                                                                    name="last_name"
                                                                 />
                                                             </div>
                                                             <div
@@ -198,7 +266,6 @@ export function Profile(props) {
                                                                     }
                                                                     id="PassConfirmation"
                                                                     type="password"
-                                                                    name="Password"
                                                                 />
                                                             </div>
                                                         </div>

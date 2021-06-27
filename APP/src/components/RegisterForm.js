@@ -8,7 +8,7 @@ export function RegisterForm(props) {
     const passwordConfirm = useRef();
     const firstName = useRef();
     const lastName = useRef();
-    const { singup } = useAuth();
+    const { login } = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -24,7 +24,30 @@ export function RegisterForm(props) {
         try {
             setError("");
             setLoading(true);
-            await singup(email.current.value, password.current.value);
+            const user = {
+                displayName: `${firstName.current.value} ${lastName.current.value}`,
+                email: email.current.value,
+                password: password.current.value,
+            };
+            const response = await fetch(
+                //`https://prueba-api-programacion-3.herokuapp.com/api/user`,
+                `http://localhost:5050/api/user`,
+
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user),
+                }
+            );
+            const { status } = response;
+            const result = await response.json();
+            if (status === 200) {
+                await login(user.email, user.password);
+            } else {
+                throw new Error(result.message);
+            }
             setLoading(false);
             history.push("/");
         } catch (error) {
