@@ -36,6 +36,16 @@ export function JobModal(props) {
                     }}
                 >
                     <div className="form-group">
+                        <label>URL</label>
+                        <input
+                            readOnly={true}
+                            className="form-control"
+                            type="text"
+                            name="url"
+                            value={job.url}
+                        />
+                    </div>
+                    <div className="form-group">
                         <label>Company</label>
                         <input
                             readOnly={true}
@@ -45,7 +55,6 @@ export function JobModal(props) {
                             value={job.company}
                         />
                     </div>
-
                     <div className="form-group">
                         <label>Location</label>
                         <input
@@ -105,6 +114,7 @@ export function JobModal(props) {
                             name="email"
                             value={job.email}
                         />
+                        {/* <a href={`mailto:${job.email}`}>{job.email}</a> */}
                     </div>
                     <div className="form-group">
                         <label>How to apply?</label>

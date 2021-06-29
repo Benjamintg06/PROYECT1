@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null);
     const [token, setToken] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [userCompany, setUserCompany] = useState("");
     const [loading, setLoading] = useState(true);
 
     const [image, setImage] = useState(null);
@@ -32,42 +33,46 @@ export function AuthProvider({ children }) {
     }
 
     useEffect(() => {
-        const unsusribe = projectAuth.onAuthStateChanged((user) => {
-            setCurrentUser(user);
+        const unsusribe = projectAuth.onAuthStateChanged(async (user) => {
             if (user) {
-                user.getIdToken()
-                    .then((token) => setToken(token))
-                    .catch((error) => setToken(null));
-                user.getIdTokenResult()
-                    .then((idTokenResult) => {
-                        setIsAdmin(idTokenResult.claims.admin);
-                    })
-                    .catch((error) => {
-                        setIsAdmin(false);
-                    });
+                try {
+                    const idTokenResult = await user.getIdTokenResult();
+                    setToken(idTokenResult.token);
+                    setIsAdmin(idTokenResult.claims.admin);
+                    setUserCompany(idTokenResult.claims.company);
+                } catch (error) {
+                    setToken(null);
+                    setIsAdmin(false);
+                    setUserCompany("");
+                }
             } else {
                 setToken(null);
                 setIsAdmin(false);
+                setUserCompany("");
             }
+            setCurrentUser(user);
             setLoading(false);
         });
         return unsusribe;
     }, []);
 
     useEffect(() => {
-        if (currentUser) {
+        if (currentUser && currentUser.photoURL) {
             const ramdon = Date.now();
             setImage(
                 `https://storage.googleapis.com/proyectofinalpw-d35e3.appspot.com/${currentUser.uid}?${ramdon}`
             );
+        } else {
+            setImage(null);
         }
     }, [currentUser]);
 
     const value = {
         isAdmin,
         token,
-        currentUser,
+        userCompany,
         image,
+        currentUser,
         setCurrentUser,
         singup,
         login,

@@ -13,10 +13,6 @@ export function Admin(props) {
                 <div id="content">
                     <Navbar></Navbar>
                     <div className="container-fluid">
-                        <h3 className="text-dark mb-4">Admin</h3>
-                    </div>
-                    <AdminTable></AdminTable>{" "}
-                    <div className="container-fluid">
                         <h3 className="text-dark mb-4">Categories</h3>
                     </div>
                     <CategoryForm></CategoryForm>
@@ -24,6 +20,10 @@ export function Admin(props) {
                         <h3 className="text-dark mb-4">Add an Admin</h3>
                     </div>
                     <RegisterAdminForm></RegisterAdminForm>
+                    <div className="container-fluid">
+                        <h3 className="text-dark mb-4">Admin</h3>
+                    </div>
+                    <AdminTable></AdminTable>
                 </div>
             </div>
         </div>

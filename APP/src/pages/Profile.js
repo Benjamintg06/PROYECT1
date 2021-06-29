@@ -6,7 +6,8 @@ import Swal from "sweetalert2";
 import { ProfileTable } from "../components/ProfileTable";
 
 export function Profile(props) {
-    const { currentUser, setCurrentUser, token, image } = useAuth();
+    const { currentUser, setCurrentUser, token, image, userCompany, isAdmin } =
+        useAuth();
 
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState(null);
@@ -42,8 +43,9 @@ export function Profile(props) {
         if (newFile) {
             const objectURL = URL.createObjectURL(newFile);
             photo.current.src = objectURL;
+        } else {
+            photo.current.src = image ? image : "assets/img/avatars/image.png";
         }
-        sendForm();
     };
 
     const handleSubmit = async (e) => {
@@ -116,9 +118,8 @@ export function Profile(props) {
                                             alt="Profile"
                                             className="rounded-circle mb-3 mt-4"
                                             src={
-                                                currentUser.photoURL
-                                                    ? image
-                                                    : "assets/img/avatars/image.png"
+                                                image ||
+                                                "assets/img/avatars/image.png"
                                             }
                                             width="160"
                                             height="160"
@@ -127,8 +128,9 @@ export function Profile(props) {
                                             <div className="custom-file">
                                                 <input
                                                     type="file"
+                                                    accept="image/*"
+                                                    name="logo"
                                                     className="custom-file-input"
-                                                    id="customFile"
                                                     onChange={handleChange}
                                                 />
                                                 <label
@@ -279,7 +281,7 @@ export function Profile(props) {
                             </div>
                         </div>
                     </div>
-                    <ProfileTable></ProfileTable>
+                    {(userCompany || isAdmin) && <ProfileTable></ProfileTable>}
                 </div>
             </div>
         </div>

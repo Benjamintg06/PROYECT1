@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export function Sidebar(props) {
@@ -52,25 +52,40 @@ export function Sidebar(props) {
                 <hr className="sidebar-divider my-0" />
                 <ul className="nav navbar-nav text-light" id="accordionSidebar">
                     <li className="nav-item" role="presentation">
-                        <Link className="nav-link active" to="/">
+                        <NavLink
+                            className="nav-link"
+                            exact
+                            to="/"
+                            activeClassName="active"
+                        >
                             <i className="fas fa-home"></i>
                             <span>Home</span>
-                        </Link>
+                        </NavLink>
                     </li>
                     {currentUser && (
                         <li className="nav-item" role="presentation">
-                            <Link className="nav-link" to="/profile">
+                            <NavLink
+                                className="nav-link"
+                                exact
+                                to="/profile"
+                                activeClassName="active"
+                            >
                                 <i className="fas fa-user-cog"></i>
                                 <span>Profile</span>
-                            </Link>
+                            </NavLink>
                         </li>
                     )}
                     {isAdmin && (
                         <li className="nav-item" role="presentation">
-                            <Link className="nav-link" to="/admin">
+                            <NavLink
+                                className="nav-link"
+                                exact
+                                to="/admin"
+                                activeClassName="active"
+                            >
                                 <i className="fas fa-tools"></i>
                                 <span>Admin</span>
-                            </Link>
+                            </NavLink>
                         </li>
                     )}
                     {currentUser ? (
@@ -86,10 +101,14 @@ export function Sidebar(props) {
                         </li>
                     ) : (
                         <li className="nav-item" role="presentation">
-                            <Link className="nav-link" to="/auth/login">
+                            <NavLink
+                                className="nav-link"
+                                exact
+                                to="/auth/login"
+                            >
                                 <i className="fas fa-sign-in-alt"></i>
                                 <span>Login</span>
-                            </Link>
+                            </NavLink>
                         </li>
                     )}
                 </ul>

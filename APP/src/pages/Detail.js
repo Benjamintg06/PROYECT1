@@ -9,6 +9,6 @@ export function Detail(props) {
     useEffect(() => {
         setJob(jobs.find((job) => job.uid === uid));
     }, [jobs, uid]);
-
+    //<Redirect to="/somewhere/else" />
     return <div id="wrapper">{JSON.stringify(job)}</div>;
 }

@@ -8,13 +8,16 @@ export function RegisterForm(props) {
     const passwordConfirm = useRef();
     const firstName = useRef();
     const lastName = useRef();
+    const company = useRef();
     const { login } = useAuth();
     const [error, setError] = useState("");
+    const [option, setOption] = useState(false);
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
     async function handleSubmit(e) {
         e.preventDefault();
+
         if (password.current.value !== passwordConfirm.current.value) {
             return setError("Passwords do not match");
         }
@@ -28,6 +31,7 @@ export function RegisterForm(props) {
                 displayName: `${firstName.current.value} ${lastName.current.value}`,
                 email: email.current.value,
                 password: password.current.value,
+                company: company.current ? company.current.value : "",
             };
             const response = await fetch(
                 `https://prueba-api-programacion-3.herokuapp.com/api/user`,
@@ -150,6 +154,34 @@ export function RegisterForm(props) {
                                 />
                             </div>
                         </div>
+                        <div className="form-check form-switch mb-3">
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="flexSwitchCheckDefault"
+                                onChange={(e) => setOption(e.target.checked)}
+                            />
+                            <label
+                                className="form-check-label"
+                                htmlFor="flexSwitchCheckDefault"
+                            >
+                                Are you a company user?
+                            </label>
+                        </div>
+                        {option && (
+                            <div className="form-group ">
+                                <input
+                                    className="
+            form-control form-control-user
+        "
+                                    type="text"
+                                    placeholder="Company name"
+                                    name="company"
+                                    ref={company}
+                                    required
+                                />
+                            </div>
+                        )}
                         <button
                             className="btn btn-primary btn-block text-white btn-user"
                             type="submit"

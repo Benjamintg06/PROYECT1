@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 export function Post(props) {
     const { categories } = useCategory();
-    const { currentUser, token } = useAuth();
+    const { currentUser, token, userCompany } = useAuth();
 
     const [loading, setLoading] = useState(false);
 
@@ -19,6 +19,7 @@ export function Post(props) {
     const description = useRef();
     const email = useRef();
     const howApply = useRef();
+    const url = useRef();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,6 +33,7 @@ export function Post(props) {
             category: category.current.value,
             type: type.current.value,
             description: description.current.value,
+            url: url.current.value,
             poster: currentUser.uid,
         };
 
@@ -118,7 +120,13 @@ export function Post(props) {
                                             &nbsp;Ingrese la información
                                             requerida
                                         </legend>
-
+                                        <label htmlFor="company">URL</label>
+                                        <input
+                                            ref={url}
+                                            className="form-control"
+                                            type="text"
+                                            name="url"
+                                        />
                                         <label htmlFor="company">Company</label>
                                         <input
                                             ref={company}
@@ -126,6 +134,7 @@ export function Post(props) {
                                             type="text"
                                             name="company"
                                             required
+                                            defaultValue={userCompany || ""}
                                         />
                                         <label htmlFor="location">
                                             Location

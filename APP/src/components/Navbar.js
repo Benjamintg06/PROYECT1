@@ -61,25 +61,24 @@ export function Navbar(props) {
                     </div>
                 </Link>
                 {currentUser && (
-                    <div className="dropdown no-arrow">
-                        <div
-                            className="dropdown-toggle nav-link"
-                            data-toggle="dropdown"
-                            aria-expanded="false"
-                            href="#"
-                        >
-                            <img
-                                style={{ height: "50px", width: "50px" }}
-                                className="border rounded-circle img-profile"
-                                alt="Profile"
-                                src={
-                                    currentUser.photoURL
-                                        ? image
-                                        : "assets/img/avatars/image.png"
-                                }
-                            />
+                    <Link to="/profile">
+                        <div className="dropdown no-arrow">
+                            <div
+                                className="dropdown-toggle nav-link"
+                                data-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <img
+                                    style={{ height: "50px", width: "50px" }}
+                                    className="border rounded-circle img-profile"
+                                    alt="Profile"
+                                    src={
+                                        image || "assets/img/avatars/image.png"
+                                    }
+                                />
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 )}
             </div>
         </nav>

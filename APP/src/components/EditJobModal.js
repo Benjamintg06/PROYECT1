@@ -133,6 +133,16 @@ export function EditJobModal({ job, show, showModal }) {
                     }}
                 >
                     <div className="form-group">
+                        <label>URL</label>
+                        <input
+                            readOnly={true}
+                            className="form-control"
+                            type="text"
+                            name="url"
+                            value={job.url}
+                        />
+                    </div>
+                    <div className="form-group">
                         <label>Company</label>
                         <input
                             ref={company}
